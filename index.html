@@ -59,6 +59,11 @@
             box-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
         }
 
+        /* Gizli YouTube Oynatıcı */
+        #youtube-player {
+            display: none;
+        }
+
         /* Parlayan Başlık Efekti */
         h1 {
             font-size: 3.2rem;
@@ -204,8 +209,8 @@
             <button class="music-btn" onclick="toggleMusic()" id="musicBtn">
                 🎵 Marşı Başlat
             </button>
-            <!-- Jumpshare oynatıcısı (iframe) üzerinden ses çalmayı sağlayan altyapı -->
-            <iframe id="audioFrame" src="https://jumpshare.com/embed/pgR7M5vrkRWsW8ExIrWJ" style="display:none;" allow="autoplay"></iframe>
+            <!-- Gizli YouTube Oynatıcı Alanı -->
+            <div id="youtube-player"></div>
         </div>
 
         <!-- Parlayan Başlık -->
@@ -241,22 +246,42 @@
             </svg>
         </footer>
 
-    <!-- Jumpshare Ses Kontrol Scripti -->
+    <!-- YouTube API ile Sorunsuz Müzik Kontrolü -->
     <script>
-        let isPlaying = false;
-        const btn = document.getElementById("musicBtn");
-        const frame = document.getElementById("audioFrame");
+        var player;
+        var isPlaying = false;
+        var btn = document.getElementById("musicBtn");
+
+        // YouTube IFrame API'sini yüklüyoruz
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '0',
+                width: '0',
+                videoId: 'BURAYA_YOUTUBE_VIDEO_ID', // Örn: dQw4w9WgXcQ
+                playerVars: {
+                    'loop': 1,
+                    'playlist': 'BURAYA_YOUTUBE_VIDEO_ID'
+                }
+            });
+        }
 
         function toggleMusic() {
-            // Jumpshare gömülü oynatıcısını tetikleme yöntemi
+            if (!player || typeof player.playVideo !== 'function') {
+                alert("Müzik yükleniyor, lütfen birkaç saniye sonra tekrar deneyin.");
+                return;
+            }
+
             if (!isPlaying) {
-                // Oynatmak için iframe kaynağını yenileyip tetikliyoruz
-                frame.src = "https://jumpshare.com/embed/pgR7M5vrkRWsW8ExIrWJ";
+                player.playVideo();
                 btn.innerHTML = "⏸️ Marşı Durdur";
                 isPlaying = true;
             } else {
-                // Durdurmak için frame'i boşaltıyoruz
-                frame.src = "";
+                player.pauseVideo();
                 btn.innerHTML = "🎵 Marşı Başlat";
                 isPlaying = false;
             }
@@ -265,3 +290,4 @@
 
 </body>
 </html>
+
