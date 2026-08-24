@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOZKURT ESPOR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0b0b0e;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at center, #1a1500 0%, #0b0b0e 70%);
+        }
+
+        .container {
+            text-align: center;
+            padding: 30px 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Müzik Kontrol Butonu */
+        .music-bar {
+            margin-bottom: 15px;
+        }
+
+        .music-btn {
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            color: #0b0b0e;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 900;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
+        }
+
+        /* Parlayan Başlık Efekti */
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: #ffd700;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6),
+                         0 0 20px rgba(255, 215, 0, 0.4),
+                         0 0 30px rgba(255, 215, 0, 0.2);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.9), 0 0 30px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.4);
+            }
+        }
+
+        /* Logo Stili ve Parlama Çerçevesi */
+        .logo-box {
+            margin: 15px 0;
+            display: inline-block;
+            position: relative;
+        }
+
+        .logo-box img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7), inset 0 0 15px rgba(255, 215, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo-box img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 45px rgba(255, 215, 0, 0.95);
+        }
+
+        /* Owner ve Bilgi Alanı */
+        .owner-info {
+            font-size: 1.2rem;
+            color: #d4af37;
+            margin: 15px 0;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Kadro Alanı */
+        .roster-section {
+            margin-top: 20px;
+            background: rgba(20, 20, 25, 0.85);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .roster-section h2 {
+            font-size: 1.4rem;
+            color: #ffd700;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #ffd700;
+            display: inline-block;
+            padding-bottom: 4px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .roster-list {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .roster-list li {
+            background: #15151a;
+            border: 1px solid #444;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .roster-list li:hover {
+            border-color: #ffd700;
+            color: #ffd700;
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Alt Kısım & İnstagram Butonu */
+        footer {
+            margin-top: 20px;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .insta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            color: white;
+            box-shadow: 0 4px 20px rgba(214, 36, 159, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+        }
+
+        .insta-btn:hover {
+            transform: scale(1.12);
+            box-shadow: 0 6px 25px rgba(214, 36, 159, 0.8);
+        }
+
+        .insta-btn svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Müzik Çalar Butonu -->
+        <div class="music-bar">
+            <button class="music-btn" onclick="toggleMusic()" id="musicBtn">
+                🎵 Marşı Başlat
+            </button>
+            <!-- Jumpshare oynatıcısı (iframe) üzerinden ses çalmayı sağlayan altyapı -->
+            <iframe id="audioFrame" src="https://jumpshare.com/embed/pgR7M5vrkRWsW8ExIrWJ" style="display:none;" allow="autoplay"></iframe>
+        </div>
+
+        <!-- Parlayan Başlık -->
+        <h1>BOZKURT ESPOR</h1>
+
+        <!-- Espor Logosu -->
+        <div class="logo-box">
+            <img src="https://i.ibb.co/KxrFqrJ7/23352.jpg" alt="Bozkurt Espor Logo">
+        </div>
+
+        <!-- Owner ve IGL Bilgisi -->
+        <div class="owner-info">
+            OWNER: WOZY &nbsp;|&nbsp; IGL: KADİR
+        </div>
+
+        <!-- Kadro -->
+        <div class="roster-section">
+            <h2>KADRO</h2>
+            <ul class="roster-list">
+                <li>WOZY</li>
+                <li>KADİR</li>
+                <li>CYCLONE</li>
+                <li>AHMET</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer ve İnstagram Butonu -->
+    <footer>
+        <a href="https://www.instagram.com/wozy.81?igsh=MXhjM3JkN3g0YWZuZg==" target="_blank" class="insta-btn" title="Kanala Katıl / Instagram">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+        </footer>
+
+    <!-- Jumpshare Ses Kontrol Scripti -->
+    <script>
+        let isPlaying = false;
+        const btn = document.getElementById("musicBtn");
+        const frame = document.getElementById("audioFrame");
+
+        function toggleMusic() {
+            // Jumpshare gömülü oynatıcısını tetikleme yöntemi
+            if (!isPlaying) {
+                // Oynatmak için iframe kaynağını yenileyip tetikliyoruz
+                frame.src = "https://jumpshare.com/embed/pgR7M5vrkRWsW8ExIrWJ";
+                btn.innerHTML = "⏸️ Marşı Durdur";
+                isPlaying = true;
+            } else {
+                // Durdurmak için frame'i boşaltıyoruz
+                frame.src = "";
+                btn.innerHTML = "🎵 Marşı Başlat";
+                isPlaying = false;
+            }
+        }
+    </script>
+
+</body>
+</html>
